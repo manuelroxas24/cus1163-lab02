@@ -1,0 +1,7 @@
+1. Both methods result in total of 5 syscalls (openat(1), read(2), write(1), close(1)) 
+
+2. The difference between fopen() and open() is that fgets doesn't result in an exact mapping to read. 
+Instead fgets pulls from the buffer and only calls read when the buffer runs out. Unlike open() which results in an exact correspondence between calls and syscalls due to calling directly from the kernel.
+
+3. The library method makes different system calls because of its buffer size. It fetches a larger block of bytes (1024) for one read() compared to regular system call method (255). 
+However because of the small file size the amount of reads was the same. 
